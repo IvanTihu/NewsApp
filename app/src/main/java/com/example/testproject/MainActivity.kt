@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.textPassword.addTextChangedListener(textWatcher)
+        binding.textLogin.addTextChangedListener(textWatcher)
     }
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -42,11 +43,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-        }
+            }
 
         override fun afterTextChanged(p0: Editable?) {
-            binding.btIn.isEnabled = true
+            val text_login = binding.textLogin.text.toString()
+            val text_password = binding.textPassword.toString()
+            if (!text_login.isNullOrEmpty() && !text_password.isNullOrEmpty())
+                binding.btIn.isEnabled = true
+
+
         }
     }
 
