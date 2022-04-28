@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val loginIn = "Ivan"
     val passwordIn = "111a"
-    var loginValid = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,28 +31,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textLogin.doAfterTextChanged {
-            loginValid = isLoginValid(it.toString())
+            binding.btIn.isEnabled = isLoginValid(it.toString()) && isPasswordValid(binding.textPassword.text.toString())
         }
 
         binding.textPassword.doAfterTextChanged {
-            val rez = isPasswordValid(it.toString())
-            binding.btIn.isEnabled = rez && loginValid
+            binding.btIn.isEnabled = isPasswordValid(it.toString()) && isLoginValid(binding.textLogin.text.toString())
         }
     }
 
-    private fun loginValid (login: String, password: String):Boolean = login == loginIn && password == passwordIn
+    private fun loginValid(login: String, password: String): Boolean =
+        login == loginIn && password == passwordIn
 
     private fun isLoginValid(text: String): Boolean = text.length > 2
 
-    private fun isPasswordValid(text: String): Boolean {
-       var hesLetter = false
-        var number: Int = 0
-
-        text.forEach {
-            if (it.isDigit()) number++
-            else if (it.isLetter()) hesLetter = true
+    private fun isPasswordValid(password: String): Boolean {
+        var hasLetter = false
+        password.forEach {
+            if (it.isDigit())
+                hasLetter = true
         }
-        return number > 2 && hesLetter
+        return hasLetter && password.length > 6
     }
 
 
