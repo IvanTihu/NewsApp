@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import com.example.testproject.databinding.FragmentLoginBinding
@@ -15,42 +16,45 @@ class LoginFragment : Fragment() {
     val loginIn = "Ivan"
     val passwordIn = "111a"
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.bind(view)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentLoginBinding.bind(view)
+
+        binding.textLogin.setText("Ivan")
+
+
         binding.textLogin.doAfterTextChanged {
-            binding.btIn.isEnabled = isLoginValid(it.toString()) && isPasswordValid(binding.textPassword.text.toString())
+            binding.btIn.isEnabled =
+                isLoginValid(it.toString()) && isPasswordValid(binding.textPassword.text.toString())
         }
 
         binding.textPassword.doAfterTextChanged {
-            binding.btIn.isEnabled = isPasswordValid(it.toString()) && isLoginValid(binding.textLogin.text.toString())
+            binding.btIn.isEnabled =
+                isPasswordValid(it.toString()) && isLoginValid(binding.textLogin.text.toString())
         }
 
         binding.btIn.setOnClickListener {
             binding.apply {
                 if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
                     tvRezult.text = "Congratulation you sign in"
+                    tvRezult.isVisible = true
 
 
+                    // todo open Second Fragment and send Login name to it
 
 
-
-                  //  layoutLogin.visibility = View.GONE
-                    //layoutPassword.visibility = View.GONE
                 } else tvRezult.text = "Invalid login or password"
 
             }
         }
     }
-
 
 
     private fun loginValid(login: String, password: String): Boolean =
