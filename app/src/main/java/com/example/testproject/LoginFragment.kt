@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.testproject.databinding.FragmentLoginBinding
 
 
@@ -44,8 +46,11 @@ class LoginFragment : Fragment() {
             binding.apply {
                 if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
                     tvRezult.text = "Congratulation you sign in"
-                    tvRezult.isVisible = true
-
+                    val userLogin = textLogin.text.toString()
+                    findNavController().navigate(
+                        R.id.action_loginFragment2_to_secondFragment2,
+                        bundleOf("key" to userLogin)
+                    )
 
                     // todo open Second Fragment and send Login name to it
 
