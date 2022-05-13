@@ -12,14 +12,16 @@ import com.example.testproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    val loginIn = "Ivan"
-    val passwordIn = "111a"
+    /*val loginIn = "Ivan"
+    val passwordIn = "111a"  */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btIn.setOnClickListener {
+
+
+       /* binding.btIn.setOnClickListener {
             binding.apply {
                 if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
                     tvRezult.text = "Congratulation you sign in"
@@ -36,10 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.textPassword.doAfterTextChanged {
             binding.btIn.isEnabled = isPasswordValid(it.toString()) && isLoginValid(binding.textLogin.text.toString())
-        }
+        }  */
     }
 
-    private fun loginValid(login: String, password: String): Boolean =
+   /* private fun loginValid(login: String, password: String): Boolean =
         login == loginIn && password == passwordIn
 
     private fun isLoginValid(text: String): Boolean = text.length > 2
@@ -50,8 +52,8 @@ class MainActivity : AppCompatActivity() {
             if (it.isDigit())
                 hasLetter = true
         }
-        return hasLetter && password.length > 6
-    }
+        return hasLetter && password.length > 3
+    }  */
 
 
 }
