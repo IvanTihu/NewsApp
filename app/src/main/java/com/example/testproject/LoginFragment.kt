@@ -48,12 +48,8 @@ class LoginFragment : Fragment() {
                     tvRezult.text = "Congratulation you sign in"
                     val userLogin = textLogin.text.toString()
                     findNavController().navigate(
-                        R.id.action_loginFragment2_to_secondFragment2,
-                        bundleOf("key" to userLogin)
+                        LoginFragmentDirections.actionLoginFragmentToSecondFragment(userLogin)
                     )
-
-                    // todo open Second Fragment and send Login name to it
-
 
                 } else tvRezult.text = "Invalid login or password"
 
