@@ -55,6 +55,9 @@ class LoginFragment : Fragment() {
 
             }
         }
+        binding.btRegister.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        }
     }
 
 
