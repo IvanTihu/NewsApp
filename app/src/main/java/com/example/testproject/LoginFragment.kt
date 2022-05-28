@@ -32,47 +32,28 @@ class LoginFragment : Fragment() {
         binding.textLogin.setText("Ivan")
 
 
-        binding.textLogin.doAfterTextChanged {
-            binding.btIn.isEnabled =
-                isLoginValid(it.toString()) && isPasswordValid(binding.textPassword.text.toString())
-        }
 
-        binding.textPassword.doAfterTextChanged {
-            binding.btIn.isEnabled =
-                isPasswordValid(it.toString()) && isLoginValid(binding.textLogin.text.toString())
-        }
+//        binding.btIn.setOnClickListener {
+//            binding.apply {
+//                if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
+//                    tvRezult.text = "Congratulation you sign in"
+//                    val userLogin = textLogin.text.toString()
+//                    findNavController().navigate(
+//                        LoginFragmentDirections.actionLoginFragmentToSecondFragment(userLogin)
+//                    )
+//
+//                } else tvRezult.text = "Invalid login or password"
+//
+//            }
+//        }
 
-        binding.btIn.setOnClickListener {
-            binding.apply {
-                if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
-                    tvRezult.text = "Congratulation you sign in"
-                    val userLogin = textLogin.text.toString()
-                    findNavController().navigate(
-                        LoginFragmentDirections.actionLoginFragmentToSecondFragment(userLogin)
-                    )
 
-                } else tvRezult.text = "Invalid login or password"
-
-            }
-        }
         binding.btRegister.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 
 
-    private fun loginValid(login: String, password: String): Boolean =
-        login == loginIn && password == passwordIn
 
-    private fun isLoginValid(text: String): Boolean = text.length > 2
-
-    private fun isPasswordValid(password: String): Boolean {
-        var hasLetter = false
-        password.forEach {
-            if (it.isDigit())
-                hasLetter = true
-        }
-        return hasLetter && password.length > 3
-    }
 
 }
