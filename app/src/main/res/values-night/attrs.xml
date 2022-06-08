@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="circle_percent_view_attrs">
+        <attr name="firstColor" format="color|reference"/>
+        <attr name="secondColor" format="color|reference"/>
+        <attr name="bgColor" format="color|reference"/>
+        <attr name="emptyColor" format="color|reference"/>
+    </declare-styleable>
+
+</resources>

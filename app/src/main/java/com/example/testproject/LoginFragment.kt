@@ -1,16 +1,14 @@
 package com.example.testproject
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
-import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.testproject.databinding.FragmentLoginBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -29,31 +27,29 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.textLogin.setText("Ivan")
+        binding.circlePercentView.setPercentage(approvedPercentage = 50f, requiredPercentage = 40f)
+
+        binding.verticalBarChart.setPercentage(22, 44)
 
 
-
-//        binding.btIn.setOnClickListener {
-//            binding.apply {
-//                if (loginValid(textLogin.text.toString(), textPassword.text.toString())) {
-//                    tvRezult.text = "Congratulation you sign in"
-//                    val userLogin = textLogin.text.toString()
-//                    findNavController().navigate(
-//                        LoginFragmentDirections.actionLoginFragmentToSecondFragment(userLogin)
-//                    )
 //
-//                } else tvRezult.text = "Invalid login or password"
-//
-//            }
+//    lifecycleScope.launch{
+//        var i=0
+//        repeat(100){
+//           delay(100)
+//            // binding.horizontalBarChart.setPercentage(i,i)
+//            binding.verticalBarChart.setPercentage(i, i)
+//            i++
 //        }
+//
+//    }
 
 
-        binding.btRegister.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
-        }
     }
 
 
 
 
+
 }
+

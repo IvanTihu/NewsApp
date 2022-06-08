@@ -10,4 +10,14 @@
     <color name="background">#4696D6</color>
     <color name="hint">#DCD2D2</color>
 
+    <color name="linked_add_btn_on_tap">#da8300</color>
+    <color name="add_btn_disabled">#75787b</color>
+    <color name="sheet_to_floor_add_btn_on_tap">#61A300</color>
+    <color name="bg">#1F1F1F</color>
+
+    <color name="login_bg">#141414</color>
+
+    <color name="text">#BBBCBC</color>
+
+
 </resources>
