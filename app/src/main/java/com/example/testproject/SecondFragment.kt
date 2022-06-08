@@ -7,28 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.testproject.databinding.FragmentSecondBinding
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.example.testproject.databinding.FragmentHomeBinding
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 
 class SecondFragment : Fragment() {
-    lateinit var binding: FragmentSecondBinding
+    lateinit var binding: FragmentHomeBinding
     private val args: SecondFragmentArgs by navArgs()
-    lateinit var dataStore: DataStore<Preferences>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_second, container, false)
-        binding = FragmentSecondBinding.bind(view)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.bind(view)
         return binding.root
     }
 
@@ -37,12 +32,6 @@ class SecondFragment : Fragment() {
         val message = args.name
         binding.tvLogin.text = "Hello $message"
 
-
-
-        val EXAMPLE_COUNTER = intPreferencesKey("example_counter")
-        val exampleCounterFlow: Flow<Int> = context?.dataStore?.data?.map { preferences ->
-            preferences[EXAMPLE_COUNTER] ?: 0
-        }!!
 
     }
 

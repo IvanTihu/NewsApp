@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutLogin"
+        android:id="@+id/layoutLoginRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textLogin"
+            android:id="@+id/textLoginRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
@@ -49,7 +49,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutLogin">
+        app:layout_constraintTop_toBottomOf="@id/layoutLoginRegister">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textPassword"
@@ -66,11 +66,13 @@
         android:id="@+id/btRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="296dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutPassword" />
+        app:layout_constraintTop_toBottomOf="@id/layoutPassword"
+        app:layout_constraintVertical_bias="0.191" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
