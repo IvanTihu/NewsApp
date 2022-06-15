@@ -9,11 +9,12 @@
 
     <com.example.testproject.CirclePercentView
         android:id="@+id/circlePercentView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="136dp"
+        android:layout_height="136dp"
         android:layout_marginTop="16dp"
         app:firstColor="@color/sheet_to_floor_add_btn_on_tap"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -43,9 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:firstColor="@color/sheet_to_floor_add_btn_on_tap"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/center"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/circlePercentView" />
 
     <com.example.testproject.VerticalBarChart
         android:id="@+id/verticalBarChart"
@@ -55,6 +55,57 @@
         app:firstColor="@color/sheet_to_floor_add_btn_on_tap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/horizontalBarChart" />
+
+
+    <com.example.testproject.ExpandableView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expandView"
+        app:layout_constraintTop_toBottomOf="@id/verticalBarChart">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:id="@+id/internalView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/id1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Andrian Druk"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="slkdmslkdflksdjflkdfd
+fdfdfdfdf"
+                android:textColor="@color/white"
+                android:id="@+id/id2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id1" />
+
+            <com.example.testproject.VerticalBarChart
+                android:id="@+id/verticalBarChart2"
+                android:layout_width="wrap_content"
+                android:layout_height="164dp"
+                android:layout_marginTop="16dp"
+                app:firstColor="@color/sheet_to_floor_add_btn_on_tap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.example.testproject.ExpandableView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

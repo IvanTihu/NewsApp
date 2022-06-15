@@ -13,7 +13,7 @@ class CirclePercentView(context: Context?, attrs: AttributeSet?) : View(context,
     var paint: Paint? = null
     private var approvedPercentage = 0f
     private var requiredPercentage = 0f
-    private val stroke = 20.px.toFloat()
+    private val stroke = 12.px.toFloat()
     private var requiredColor: Int = 0
     private var approvedColor: Int = 0
     private var bgColor: Int = 0
