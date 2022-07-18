@@ -42,7 +42,7 @@ class DataAdapter(private var dataList: List<Article>?,
         fun bind(data: Article?) = with (binding) {
             tvTask.text = data?.title
             tvData.text = data?.author
-            Picasso.get().load(data?.urlToImage).into(imFoto);
+            Picasso.get().load(data?.urlToImage).into(imFoto)
 
         }
     }

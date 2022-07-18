@@ -35,7 +35,7 @@ class SecondFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private val args: SecondFragmentArgs by navArgs()
     var adapter:DataAdapter= DataAdapter(listOf())
-    val viewModel: NewsViewModel by viewModels()
+    val viewModel: NewsViewModel  by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
