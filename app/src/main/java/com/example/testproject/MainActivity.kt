@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.Preferences
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
    // private lateinit var sharedPref: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
