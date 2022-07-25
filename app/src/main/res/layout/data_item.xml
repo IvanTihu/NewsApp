@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     >
 
     <androidx.cardview.widget.CardView
@@ -32,11 +31,10 @@
                 android:id="@+id/tvTask"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView

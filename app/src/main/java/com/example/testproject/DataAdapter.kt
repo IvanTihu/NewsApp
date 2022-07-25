@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testproject.data.Article
 import com.example.testproject.databinding.DataItemBinding
 import com.squareup.picasso.Picasso
 
@@ -18,16 +19,13 @@ class DataAdapter(private var dataList: List<Article>?,
         notifyDataSetChanged()
     }
 
-    private lateinit var mListener: OnDataClick
 
     interface OnDataClick{
         fun onDataItemClick(position: Int)
         fun onItemDelete(position: Int)
     }
 
-     fun setOnItemClickListener(listener: OnDataClick){
-        mListener = listener
-    }
+
 
     inner class DataHolder(item: View):RecyclerView.ViewHolder(item) {
 

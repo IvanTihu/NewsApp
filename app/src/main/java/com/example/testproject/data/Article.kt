@@ -1,4 +1,6 @@
-package com.example.testproject
+package com.example.testproject.data
+
+import com.example.testproject.data.Source
 
 data class Article(
     val author: String,

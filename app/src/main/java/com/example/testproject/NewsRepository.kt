@@ -1,5 +1,7 @@
 package com.example.testproject
 
+import com.example.testproject.data.Article
+
 class NewsRepository {
 
     fun getNews(): List<Article> {

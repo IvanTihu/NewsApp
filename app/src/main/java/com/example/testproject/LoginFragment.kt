@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
         val  sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         var edit = sharedPref?.edit()
 
-        val test = true
+
         val validation = sharedPref?.getBoolean(VALID, false)
         if (validation == true){
             var userLogin = ""
@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                 }
             }
             findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToHomeFragment(userLogin)
+                LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
             )
         } else{
 
@@ -84,11 +84,10 @@ class LoginFragment : Fragment() {
                                     apply()
                                 }
 
-
                                 val test = sharedPref?.getBoolean(VALID, false)
                                 Toast.makeText(activity, test.toString(), Toast.LENGTH_SHORT ).show()
                                 findNavController().navigate(
-                                    LoginFragmentDirections.actionLoginFragmentToHomeFragment(userLogin)
+                                    LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
                                 )
                             } else {
                                 tvRezult.text = "Invalid login or password"
@@ -100,7 +99,8 @@ class LoginFragment : Fragment() {
             }
 
             binding.btRegister.setOnClickListener {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+                findNavController().navigate(LoginFragmentDirections
+                    .actionLoginFragmentToRegisterFragment())
             }
         }
 
