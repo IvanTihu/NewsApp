@@ -1,6 +1,7 @@
 package com.example.testproject
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -28,8 +29,7 @@ class NewsFragment : Fragment() {
     private val args: NewsFragmentArgs by navArgs()
     var adapter: DataAdapter = DataAdapter(listOf())
     private val viewModel: NewsViewModel by activityViewModels()
-    var sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-    var edit = sharedPref?.edit()
+    private var sharedPref: SharedPreferences? = null
 
 
     override fun onCreateView(
@@ -43,7 +43,9 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
+        sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
         layoutManager = LinearLayoutManager(context)
         binding.rcView.layoutManager = layoutManager
         binding.rcView.adapter = adapter
@@ -66,23 +68,25 @@ class NewsFragment : Fragment() {
         }
 
 
-
-        edit?.apply {
-            putString("name", message)
-            putBoolean(VALID, true)
-            apply()
+        sharedPref?.edit().apply {
+            this?.putString("name", message)
+            this?.putBoolean(VALID, true)
+            this?.apply()
         }
 
-        binding.imExit.setOnClickListener {
-            Toast.makeText(requireActivity(), "Clicked button exit", Toast.LENGTH_SHORT).show()
-            edit?.apply {
-                putBoolean(VALID, false)
-                commit()
-            }
-            findNavController().navigate(
-                NewsFragmentDirections.actionNewsFragmentToLoginFragment("")
-            )
-        }
+//        binding.imExit.setOnClickListener {
+//
+//            with(sharedPref?.edit()) {
+//                this?.putBoolean(VALID, false)
+//                this?.apply()
+//            }
+//
+//            val item = sharedPref?.getBoolean(VALID, false)
+//            Toast.makeText(requireActivity(), "VALID = $item", Toast.LENGTH_SHORT).show()
+//            findNavController().navigate(
+//                NewsFragmentDirections.actionNewsFragmentToLoginFragment()
+//            )
+//        }
 
 //        binding.bt.setOnClickListener {
 //            edit?.apply {
@@ -130,7 +134,24 @@ class NewsFragment : Fragment() {
         inflater.inflate(R.menu.action_menu_exit, menu)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    // exit from account and navigate to loginFragment, Toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.btn_exit_action -> {
+                with(sharedPref?.edit()) {
+                    this?.putBoolean(VALID, false)
+                    this?.apply()
+                }
+                val item = sharedPref?.getBoolean(VALID, false)
+                Toast.makeText(requireActivity(), "VALID = $item", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(
+                    NewsFragmentDirections.actionNewsFragmentToLoginFragment()
+                )
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when(item.itemId){
 //            R.id.btn_exit_action -> {
 //                findNavController().navigate(
@@ -146,7 +167,6 @@ class NewsFragment : Fragment() {
 //        }
 //        return super.onOptionsItemSelected(item)
 //    }
-
 
 
     private fun read(): Flow<String> {

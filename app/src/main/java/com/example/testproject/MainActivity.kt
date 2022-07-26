@@ -1,6 +1,7 @@
 package com.example.testproject
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toolbar
 import androidx.activity.viewModels
@@ -19,29 +20,28 @@ private val LOGIN_COUNTER = stringPreferencesKey("login_key")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    // private val viewModel: NewsViewModel by viewModels()
-    // private lateinit var sharedPref: SharedPreferences
+   //  private val viewModel: NewsViewModel by viewModels()
+   //  private lateinit var sharedPref: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-      //  setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar)
        // title = "News"
-        val sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+      //  val sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         val navHost = supportFragmentManager.findFragmentById(
             R.id.nav_host_fragment
         ) as NavHostFragment
 
         navController = navHost.navController
-       // NavigationUI.setupActionBarWithNavController(this, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-
     }
 
 

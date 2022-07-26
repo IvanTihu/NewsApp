@@ -60,7 +60,6 @@ class LoginFragment : Fragment() {
                 LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
             )
         } else{
-
             if (args.loginN.isNullOrEmpty().not()) {
                 val amount = args.loginN
                 binding.textLogin.setText(amount)
@@ -75,7 +74,6 @@ class LoginFragment : Fragment() {
                     lifecycleScope.launch {
                         read().collect {
                             val userLogin = textLogin.text.toString()
-
                             if (userLogin == it) {
                                 tvRezult.text = "Congratulation you sign in"
 
@@ -120,7 +118,6 @@ class LoginFragment : Fragment() {
             settings[LOGIN_COUNTER] = name
         }
     }
-
 
     private fun isPasswordValid(password: String): Boolean {
         var hasLetter = false
