@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_newsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -40,5 +43,18 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.testproject.NewsDetailsFragment"
+        android:label="News Details"
+        tools:layout="@layout/fragment_news_details">
+        <action
+            android:id="@+id/action_newsDetailsFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <argument
+            android:name="url"
+            android:defaultValue=" "
+            app:argType="string" />
     </fragment>
 </navigation>

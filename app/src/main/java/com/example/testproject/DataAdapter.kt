@@ -9,30 +9,25 @@ import com.example.testproject.databinding.DataItemBinding
 import com.squareup.picasso.Picasso
 
 class DataAdapter(private var dataList: List<Article>?,
-                  val itemClickListener: OnDataClick?=null,
+                  val itemClickListener: OnDataClick? = null,
                   val deleteClickListener: OnDataClick?=null,
                   ): RecyclerView.Adapter<DataAdapter.DataHolder>() {
-
 
     fun updateList(dataList: List<Article>?){
         this.dataList = dataList
         notifyDataSetChanged()
     }
-
-
     interface OnDataClick{
-        fun onDataItemClick(position: Int)
-        fun onItemDelete(position: Int)
+        fun onItemClick(position: Int)
+     //   fun onItemDelete(position: Int)
     }
-
-
 
     inner class DataHolder(item: View):RecyclerView.ViewHolder(item) {
 
         init {
             item.setOnClickListener {
-                itemClickListener?.onDataItemClick(adapterPosition)
-                deleteClickListener?.onItemDelete(adapterPosition)
+                itemClickListener?.onItemClick(adapterPosition)
+               // deleteClickListener?.onItemDelete(adapterPosition)
             }
         }
 

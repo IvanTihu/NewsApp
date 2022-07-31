@@ -44,14 +44,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val  sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        val sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         var edit = sharedPref?.edit()
 
 
         val validation = sharedPref?.getBoolean(VALID, false)
-        if (validation == true){
+        if (validation == true) {
             var userLogin = ""
-            lifecycleScope.launch{
+            lifecycleScope.launch {
                 read().collect {
                     userLogin = it
                 }
@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(
                 LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
             )
-        } else{
+        } else {
             if (args.loginN.isNullOrEmpty().not()) {
                 val amount = args.loginN
                 binding.textLogin.setText(amount)
@@ -83,9 +83,11 @@ class LoginFragment : Fragment() {
                                 }
 
                                 val test = sharedPref?.getBoolean(VALID, false)
-                                Toast.makeText(activity, test.toString(), Toast.LENGTH_SHORT ).show()
+                                Toast.makeText(activity, test.toString(), Toast.LENGTH_SHORT).show()
                                 findNavController().navigate(
-                                    LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
+                                    LoginFragmentDirections.actionLoginFragmentToNewsFragment(
+                                        userLogin
+                                    )
                                 )
                             } else {
                                 tvRezult.text = "Invalid login or password"
@@ -97,15 +99,13 @@ class LoginFragment : Fragment() {
             }
 
             binding.btRegister.setOnClickListener {
-                findNavController().navigate(LoginFragmentDirections
-                    .actionLoginFragmentToRegisterFragment())
+                findNavController().navigate(
+                    LoginFragmentDirections
+                        .actionLoginFragmentToRegisterFragment()
+                )
             }
         }
-
     }
-
-
-
 
     private fun read(): Flow<String> {
         return context?.dataStore?.data?.map { preferences ->
