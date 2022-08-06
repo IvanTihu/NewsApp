@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     tools:context="NewsFragment">
 
-
     <TextView
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"

@@ -1,10 +1,11 @@
 package com.example.testproject
 
 import android.content.Context
+import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
-import android.webkit.WebView
 import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
@@ -24,7 +25,10 @@ import kotlinx.coroutines.launch
 
 private val LOGIN_COUNTER = stringPreferencesKey("login_key")
 
-class NewsFragment : Fragment(), DataAdapter.OnDataClick {
+class NewsFragment : Fragment(),
+    DataAdapter.OnDataClick,
+    ConnectivityReceiver.ConnectivityReceiverListener
+{
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     lateinit var binding: FragmentNewsBinding
@@ -32,7 +36,7 @@ class NewsFragment : Fragment(), DataAdapter.OnDataClick {
     private val viewModel: NewsViewModel by activityViewModels()
     private var sharedPref: SharedPreferences? = null
     var adapter: DataAdapter = DataAdapter(listOf(), this)
-    lateinit var arrayNews: List<Article>
+    private lateinit var arrayNews: List<Article>
 
 
     override fun onCreateView(
@@ -44,22 +48,37 @@ class NewsFragment : Fragment(), DataAdapter.OnDataClick {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.registerReceiver(
+            ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
+        ConnectivityReceiver.connectivityReceiverListener = this
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.unregisterReceiver(ConnectivityReceiver())
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
+
         layoutManager = LinearLayoutManager(context)
         binding.rcView.layoutManager = layoutManager
         binding.rcView.adapter = adapter
-        viewModel.getNews()
-        binding.swipeRefresh.setOnRefreshListener {
-            Toast.makeText(requireContext(), "refresh is work", Toast.LENGTH_SHORT).show()
-            viewModel.getNews()
-        }
+//        viewModel.getNews()
+//
+//        binding.swipeRefresh.setOnRefreshListener {
+//            viewModel.getNews()
+//        }
+
         viewModel.newsLivedata.observe(viewLifecycleOwner, Observer {
             adapter.updateList(it)
             arrayNews = it
+            binding.swipeRefresh.isRefreshing = false
         })
 
         val message = args.name
@@ -118,4 +137,24 @@ class NewsFragment : Fragment(), DataAdapter.OnDataClick {
         )
     }
 
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        showNetworkMessage(isConnected)
+    }
+
+    private fun showNetworkMessage(connected: Boolean) {
+
+        if (connected) {
+            viewModel.getNews()
+
+            binding.swipeRefresh.setOnRefreshListener {
+                viewModel.getNews()
+            }
+            binding.tvLogin.text = "INTERNET IS CONNECTED"
+            Toast.makeText(requireActivity(), "Internet is connected", Toast.LENGTH_SHORT).show()
+        } else {
+            binding.tvLogin.text = "INTERNET IS DISCONNECTED"
+            Toast.makeText(requireActivity(), "Internet is disconnected", Toast.LENGTH_SHORT).show()
+        }
+
+    }
 }
