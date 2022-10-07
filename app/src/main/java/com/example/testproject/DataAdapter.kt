@@ -8,31 +8,33 @@ import com.example.testproject.data.Article
 import com.example.testproject.databinding.DataItemBinding
 import com.squareup.picasso.Picasso
 
-class DataAdapter(private var dataList: List<Article>?,
-                  val itemClickListener: OnDataClick? = null,
-                  val deleteClickListener: OnDataClick?=null,
-                  ): RecyclerView.Adapter<DataAdapter.DataHolder>() {
+class DataAdapter(
+    private var dataList: List<Article>?,
+    val itemClickListener: OnDataClick? = null,
+    val deleteClickListener: OnDataClick? = null,
+) : RecyclerView.Adapter<DataAdapter.DataHolder>() {
 
-    fun updateList(dataList: List<Article>?){
+    fun updateList(dataList: List<Article>?) {
         this.dataList = dataList
         notifyDataSetChanged()
     }
-    interface OnDataClick{
+
+    interface OnDataClick {
         fun onItemClick(position: Int)
-     //   fun onItemDelete(position: Int)
+        //   fun onItemDelete(position: Int)
     }
 
-    inner class DataHolder(item: View):RecyclerView.ViewHolder(item) {
+    inner class DataHolder(item: View) : RecyclerView.ViewHolder(item) {
 
         init {
             item.setOnClickListener {
                 itemClickListener?.onItemClick(adapterPosition)
-               // deleteClickListener?.onItemDelete(adapterPosition)
+                // deleteClickListener?.onItemDelete(adapterPosition)
             }
         }
 
         private val binding = DataItemBinding.bind(item)
-        fun bind(data: Article?) = with (binding) {
+        fun bind(data: Article?) = with(binding) {
             tvTask.text = data?.title
             tvData.text = data?.author
             Picasso.get().load(data?.urlToImage).into(imFoto)
@@ -51,6 +53,6 @@ class DataAdapter(private var dataList: List<Article>?,
     }
 
     override fun getItemCount(): Int {
-        return dataList!!.size
+        return dataList?.size ?: 0
     }
 }
