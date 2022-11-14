@@ -23,7 +23,6 @@ interface ApiInterface {
                 .baseUrl(BASE_URL)
                 .build()
             return retrofit.create(ApiInterface::class.java)
-
         }
     }
 }

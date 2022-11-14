@@ -1,11 +1,13 @@
 package com.example.testproject
 
-import androidx.lifecycle.LiveData
 import com.example.testproject.data.Article
 
 class NewsRepository {
 
     private val db = ArticleDatabase.getInstance(App.instance).articleDao
+    private val dbUser = ArticleDatabase.getInstance(App.instance).userDao
+
+    fun saveUser(user: User) = dbUser.insert(user)
 
     fun saveAll(list: List<ArticleDB>) =
         db.insertAll(list)

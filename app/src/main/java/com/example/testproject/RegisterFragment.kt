@@ -5,29 +5,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.testproject.databinding.FragmentRegisterBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.flow.collect
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class RegisterFragment : Fragment() {
 
+    private lateinit var viewModel: NewsViewModel
     private val LOGIN_COUNTER = stringPreferencesKey("login_key")
-
     lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
@@ -43,12 +40,8 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        lifecycleScope.launch {
-//            saveName("Andrian")
-//            saveName("Ivan")
-//            read().collect { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
-//        }
-
+        viewModel =
+            ViewModelProvider(this)[NewsViewModel::class.java]
 
         binding.textLoginRegister.doAfterTextChanged {
             binding.btRegister.isEnabled =
@@ -60,26 +53,21 @@ class RegisterFragment : Fragment() {
                 isPasswordValid(it.toString()) && isLoginValid(binding.textLoginRegister.text.toString())
         }
 
-
-
         binding.btRegister.setOnClickListener {
             val login = binding.textLoginRegister.text.toString()
-            lifecycleScope.launch {
-               saveName(login)
-           }
+            val password = binding.textPassword.text.toString()
+
+//            lifecycleScope.launch {
+//               saveName(login)
+//           }
+
+            viewModel.saveUser(user = User(login = login, password = password))
+
             findNavController().navigate(
                 RegisterFragmentDirections.actionRegisterFragmentToLoginFragment(login)
             )
         //todo move Login Fragment, send name end fill
         }
-
-//        val nameData = read()
-//        lifecycleScope.launch{
-//            nameData.collect {
-//                binding.title.text = it
-//            }
-//        }
-
     }
 
 

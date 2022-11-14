@@ -11,6 +11,12 @@ class NewsViewModel() : ViewModel() {
     var newsRepo: NewsRepository = NewsRepository()
     var newsLivedata = MutableLiveData<List<Article>>()
 
+    fun saveUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            newsRepo.saveUser(user)
+        }
+    }
+
     fun saveAll(list: List<ArticleDB>) {
         viewModelScope.launch(Dispatchers.IO) {
             newsRepo.saveAll(list)
@@ -18,7 +24,6 @@ class NewsViewModel() : ViewModel() {
     }
 
     fun getAllArticle() {
-
         viewModelScope.launch(Dispatchers.IO) {
             val response = newsRepo.getAll()
             withContext(Dispatchers.Main) {
@@ -29,13 +34,13 @@ class NewsViewModel() : ViewModel() {
         }
     }
 
-        fun getNews() {
-            viewModelScope.launch(Dispatchers.IO) {
-                val response = newsRepo.getNews()
-                withContext(Dispatchers.Main) {
-                    newsLivedata.value = response
-                }
+    fun getNews() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = newsRepo.getNews()
+            withContext(Dispatchers.Main) {
+                newsLivedata.value = response
             }
         }
-
     }
+
+}

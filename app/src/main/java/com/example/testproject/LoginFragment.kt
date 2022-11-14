@@ -45,10 +45,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPref = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        var edit = sharedPref?.edit()
-
-
+        val edit = sharedPref?.edit()
         val validation = sharedPref?.getBoolean(VALID, false)
+
         if (validation == true) {
             var userLogin = ""
             lifecycleScope.launch {
@@ -60,7 +59,7 @@ class LoginFragment : Fragment() {
                 LoginFragmentDirections.actionLoginFragmentToNewsFragment(userLogin)
             )
         } else {
-            if (args.loginN.isNullOrEmpty().not()) {
+            if (args.loginN.isEmpty().not()) {
                 val amount = args.loginN
                 binding.textLogin.setText(amount)
             }
@@ -90,14 +89,13 @@ class LoginFragment : Fragment() {
                                     )
                                 )
                             } else {
-                                tvRezult.text = "Invalid login or password"
+                                tvRezult.text = getString(R.string.ivnalid_login_or_password)
                                 edit?.putBoolean(VALID, false)
                             }
                         }
                     }
                 }
             }
-
             binding.btRegister.setOnClickListener {
                 findNavController().navigate(
                     LoginFragmentDirections
@@ -105,18 +103,13 @@ class LoginFragment : Fragment() {
                 )
             }
         }
+
     }
 
     private fun read(): Flow<String> {
         return context?.dataStore?.data?.map { preferences ->
             preferences[LOGIN_COUNTER] ?: ""
         }!!
-    }
-
-    private suspend fun saveName(name: String) {
-        context?.dataStore?.edit { settings ->
-            settings[LOGIN_COUNTER] = name
-        }
     }
 
     private fun isPasswordValid(password: String): Boolean {
@@ -126,5 +119,4 @@ class LoginFragment : Fragment() {
         }
         return hasLetter && password.length > 3
     }
-
 }

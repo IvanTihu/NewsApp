@@ -12,7 +12,7 @@ import com.example.testproject.databinding.FragmentNewsDetailsBinding
 
 
 class NewsDetailsFragment : Fragment() {
-    val args: NewsDetailsFragmentArgs by navArgs()
+    private val args: NewsDetailsFragmentArgs by navArgs()
     lateinit var binding: FragmentNewsDetailsBinding
 
     override fun onCreateView(
